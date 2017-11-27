@@ -39,8 +39,8 @@ app.post('/api/posts', function (req, res, next) {
     });
 });
 
-app.delete('/api/posts', function (req, res, next) {
-    Post.findByIdAndRemove(req.body._id,function(err){
+app.delete('/api/posts/:id', function (req, res, next) {
+    Post.findByIdAndRemove(req.params.id,function(err){
         if(err){
             return next(err);
         }
@@ -48,10 +48,10 @@ app.delete('/api/posts', function (req, res, next) {
     });
 });
 
-app.put('/api/posts', function (req, res, next) {
+app.put('/api/posts/:id', function (req, res, next) {
     console.log(req.body);
     Post.findByIdAndUpdate(
-        req.body._id,
+        req.params.id,
         {
             username: req.body.username,
             body: req.body.body
